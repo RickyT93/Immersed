@@ -1,0 +1,69 @@
+ALTER proc [dbo].[SurveyQuestionAnswerOptions_Select_ByCreatedBy]
+					 @CreatedBy int
+					,@PageIndex int
+					,@PageSize int
+					
+				
+/*
+----------TEST CODE--------------
+	DECLARE @CreatedBy int = 8
+
+	DECLARE @PageIndex int = 0
+			,@PageSize int = 20
+
+	EXECUTE  [dbo].[SurveyQuestionAnswerOptions_Select_ByCreatedBy] 
+			 @CreatedBy
+			,@PageIndex
+			,@PageSize
+			
+
+
+
+	select *
+	FROM dbo.[SurveyQuestionAnswerOptions]
+
+
+
+
+*/
+
+AS
+
+BEGIN
+
+	DECLARE @offset int = @PageIndex * @PageSize
+
+
+SELECT		 s.[Id] as RecordId
+			,u.[Id] as CreatedBy
+			,u.[Email]
+			,u.[FirstName]
+			,u.[LastName]
+			,u.[Mi]
+			,u.[AvatarUrl]
+			,s.[ModifiedBy]
+			,sq.[Id] as SurveyQuestionId                              
+			,s.[Text]
+			,s.[Value]
+			,s.[AdditionalInfo]
+			,s.[DateCreated]
+			,s.[DateModified]
+		    ,[TotalCount] = COUNT(1) OVER()
+
+	FROM [dbo].[SurveyQuestionAnswerOptions] as s
+
+	JOIN [dbo].[SurveyQuestions] as sq
+		ON sq.Id = s.QuestionId
+
+	JOIN [dbo].[Users] as u
+		ON u.Id = s.CreatedBy
+
+	WHERE @CreatedBy =  u.Id 
+
+	ORDER BY s.Id
+
+	OFFSET @offset ROWS
+	FETCH NEXT @PageSize ROWS ONLY
+	
+
+END
