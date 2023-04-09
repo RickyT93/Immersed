@@ -1,0 +1,25 @@
+ALTER PROCEDURE [dbo].[SurveyQuestionAnswerOptions_Delete_ById] 
+		@Id int
+AS
+
+/*  Test Script
+	
+	Select *
+	From dbo.SurveyQuestionAnswerOptions
+
+	Declare @Id int = 21;
+
+	EXECUTE [dbo].[SurveyQuestionAnswerOptions_Delete_ById] @Id
+
+	Select *
+	From dbo.SurveyQuestionAnswerOptions
+
+*/
+
+BEGIN
+
+	DELETE
+	FROM [dbo].[SurveyQuestionAnswerOptions]
+	WHERE Id = @Id
+
+END
