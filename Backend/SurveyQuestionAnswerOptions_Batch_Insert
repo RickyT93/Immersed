@@ -1,0 +1,53 @@
+ALTER PROCEDURE [dbo].[SurveyQuestionAnswerOptions_Batch_Insert] 
+			 
+			 @BatchSurveyQuestionAnswerOptions dbo.BatchSurveyQuestionAnswerOptions READONLY
+			,@Id int OUTPUT	
+AS
+
+/*  Test Script
+
+	Declare @newValues dbo.BatchSurveyQuestionAnswerOptions
+	
+	Insert Into @newValues (QuestionId,Text,Value,AdditionalInfo, CreatedBy, ModifiedBy)
+
+	Values (115, 'TestText1', 'TestValue1', 'testadditionalinfo1', 90, 90), (115, 'TestText2', 'TestValue2', 'testadditionalinfo2', 90, 90), (115, 'TestText3', 'TestValue3', 'testadditionalinfo3', 90, 90), (115, 'TestText4', 'TestValue4', 'testadditionalinfo4', 90, 90) 
+
+	Declare  @Id int = 0
+
+
+	EXECUTE dbo.SurveyQuestionAnswerOptions_Batch_Insert
+			     @newValues
+			    ,@Id 
+
+	Select * 
+	From dbo.SurveyQuestionAnswerOptions
+	
+
+
+*/
+
+BEGIN
+
+	INSERT INTO [dbo].[SurveyQuestionAnswerOptions]
+				([QuestionId]
+				,[Text]
+				,[Value]
+				,[AdditionalInfo]
+				,[CreatedBy]
+				,[ModifiedBy]
+)
+	
+	(select bs.QuestionId
+		   ,bs.Text
+		   ,bs.Value
+		   ,bs.AdditionalInfo
+		   ,bs.CreatedBy
+		   ,bs.ModifiedBy
+
+					   
+	 from @BatchSurveyQuestionAnswerOptions as bs
+	 )
+
+	SET @Id = SCOPE_IDENTITY();
+
+END
