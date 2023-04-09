@@ -1,0 +1,39 @@
+ALTER PROCEDURE [dbo].[SurveyQuestions_Delete_ById] 
+		@Id int
+AS
+
+/*  Test Script
+	
+	Select *
+	From dbo.SurveyQuestions
+	Select *
+	From dbo.SurveyQuestionAnswerOptions
+
+
+
+	Declare @Id int = 439;
+
+	EXECUTE [dbo].[SurveyQuestions_Delete_ById] @Id
+
+	Select *
+	From dbo.SurveyQuestions
+
+*/
+
+BEGIN
+	
+	
+	/*Declare @DeleteSuveyQuestionAnswerOptionId int = (Select Id
+												From SurveyQuestionAnswerOptions as sqao	
+												Where sqao.QuestionId = @Id)
+												*/
+
+	DELETE
+	FROM [dbo].[SurveyQuestionAnswerOptions]
+	WHERE QuestionId = @Id
+
+	DELETE
+	FROM [dbo].[SurveyQuestions]
+	WHERE Id = @Id
+
+END
