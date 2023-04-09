@@ -1,0 +1,58 @@
+const surveyRoutes = [
+  {
+    path: "/surveys",
+    name: "Surveys",
+    element: Surveys,
+    roles: ["SysAdmin", "OrgAdmin"],
+    exact: true,
+    isAnonymous: false,
+  },
+  {
+    path: "/surveys/:id",
+    name: "Survey",
+    element: SurveyForm,
+    roles: ["SysAdmin", "OrgAdmin"],
+    exact: true,
+    isAnonymous: false,
+  },
+  {
+    path: "/surveys/builder",
+    name: "SurveyBuilder",
+    element: SurveyBuilder,
+    roles: ["SysAdmin", "OrgAdmin"],
+    exact: true,
+    isAnonymous: false,
+  },
+   {
+    path: "/surveys/builder/surveyformbuilder",
+    name: "SurveyFormBuilder",
+    element: SurveyFormBuilder,
+    roles: ["SysAdmin", "OrgAdmin"],
+    exact: true,
+    isAnonymous: false,
+  },
+   {
+    path: "/surveys/builder/:id",
+    name: "SurveyBuilder",
+    element: SurveyBuilder,
+    roles: ["SysAdmin", "OrgAdmin"],
+    exact: true,
+    isAnonymous: false,
+  },
+  {
+    path: "/surveys/instances",
+    name: "SurveyInstance",
+    exact: true,
+    element: SurveyInstance,
+    roles: ["SysAdmin", "OrgAdmin"],
+    isAnonymous: false,
+  },
+  {
+    path: "/surveys/instances/:instanceId/details",
+    name: "SurveyInstanceDetailsCard",
+    exact: true,
+    element: SurveyInstanceDetailsCard,
+    roles: ["SysAdmin", "OrgAdmin"],
+    isAnonymous: false,
+  }
+];
