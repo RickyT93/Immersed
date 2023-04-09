@@ -1,0 +1,60 @@
+ALTER PROCEDURE [dbo].[SurveyQuestionAnswerOptions_Insert] 
+			 
+			 @QuestionId int
+			,@Text nvarchar(500)
+			,@Value nvarchar(100)
+			,@AdditionalInfo  nvarchar(200)
+			,@CreatedBy int
+			,@ModifiedBy int
+			,@Id int OUTPUT
+
+AS
+
+/*  Test Script
+
+
+
+	Declare      @QuestionId int = 11
+				,@Text nvarchar(500) = 'TestText'
+				,@Value nvarchar(100) = 'TestText'
+				,@AdditionalInfo  nvarchar(200) = 'TestText'
+				,@CreatedBy int = 17
+				,@ModifiedBy int = 17
+				,@Id int = 0
+
+	EXECUTE dbo.SurveyQuestionAnswerOptions_Insert
+			     @QuestionId 
+				,@Text
+				,@Value 
+				,@AdditionalInfo 
+				,@CreatedBy
+				,@ModifiedBy 
+			    ,@Id 
+
+	Select * 
+	From dbo.SurveyQuestions
+
+
+
+*/
+
+BEGIN
+
+	INSERT INTO [dbo].[SurveyQuestionAnswerOptions]
+				([QuestionId]
+				,[Text]
+				,[Value]
+				,[AdditionalInfo]
+				,[CreatedBy]
+				,[ModifiedBy])
+	VALUES
+				(@QuestionId
+				,@Text
+				,@Value
+				,@AdditionalInfo
+				,@CreatedBy
+				,@ModifiedBy)
+
+	SET @Id = SCOPE_IDENTITY();
+
+END
